@@ -28,7 +28,6 @@ export default [
     rules: {
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
-      'react/prop-types': 'off',
       'semi': ['error', 'always'],
       'quotes': ['error', 'single'],
       ...js.configs.recommended.rules,
@@ -40,6 +39,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/prop-types': 'off',
     },
   },
 ];
