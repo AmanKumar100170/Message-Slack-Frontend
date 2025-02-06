@@ -12,14 +12,14 @@ export const useSignup = () => {
             console.log('Successfully signed up', data);
             toast({
                 title: 'Successfully signed up',
-                description: 'You will be redirected to the login page in a few seconds.',
+                message: 'You will be redirected to the login page in a few seconds.',
             });
         },
         onError: (error) => {
             console.error('Failed to sign up', error);
             toast({
                 title: 'Failed to sign up',
-                description: error.message,
+                message: error.message,
                 variant: 'destructive'
             });
         }
