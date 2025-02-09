@@ -6,11 +6,14 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Input } from '@/components/ui/input';
 import { useCreateWorkspace } from '@/hooks/apis/workspaces/useCreateWorkspace';
 import { useCreateWorkspaceModal } from '@/hooks/context/useCreateWorkspaceModal';
+import { useToast } from '@/hooks/use-toast';
 
 export const CreateWorkspaceModal = () => {
     const { openCreateWorkspaceModal, setOpenCreateWorkspaceModal } = useCreateWorkspaceModal();
 
     const { isPending, createWorkspaceMutation } = useCreateWorkspace();
+
+    const { toast } = useToast();
 
     const [workspaceName, setWorkspaceName] = useState('');
 
@@ -27,8 +30,16 @@ export const CreateWorkspaceModal = () => {
             const data = await createWorkspaceMutation({ name: workspaceName });
             console.log('Created the workspace', data);
             navigate(`/workspaces/${data._id}`);
+            toast({
+                title: 'Workspace created successfully',
+                type: 'success'
+            });
         } catch (error) {
             console.log('Not able to create a new workspace', error);
+            toast({
+                title: 'Error in creating workspace',
+                type: 'error'
+            });
         } finally {
             setWorkspaceName('');
             setOpenCreateWorkspaceModal(false);
