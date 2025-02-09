@@ -14,7 +14,7 @@ export const WorkspacePreferencesModal = () => {
             <DialogContent>
                 <DialogHeader className='p-4 border-b bg-white'>
                     <DialogTitle>
-                        {initialValue}
+                        Edit Workspace
                     </DialogTitle>
                 </DialogHeader>
 
@@ -28,11 +28,15 @@ export const WorkspacePreferencesModal = () => {
                                 Edit
                             </p>
                         </div>
+
+                        <p className='text-sm'>
+                            {initialValue}
+                        </p>
                     </div>
 
                     <button className='flex items-center gap-x-2 px-5 py-4 bg-white rounded-lg hover:bg-gray-50'>
                         <TrashIcon className='size-5' />
-                        <p>
+                        <p className='text-sm font-semibold'>
                             Delete Workspace
                         </p>
                     </button>

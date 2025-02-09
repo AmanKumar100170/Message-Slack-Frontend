@@ -12,7 +12,7 @@ export const WorkspacePanelHeader = ({ workspace }) => {
 
     const isLoggedInUserAdminOfWorkspace = workspaceMembers?.find(member => member.memberId === auth?.user?._id && member.role === 'admin');
 
-    const { setOpenPreferences } = useWorkspacePreferencesModal();
+    const { setOpenPreferences, setInitialValue } = useWorkspacePreferencesModal();
 
     return (
         <div
@@ -53,7 +53,10 @@ export const WorkspacePanelHeader = ({ workspace }) => {
                         <>
                             <DropdownMenuItem
                                 className='cursor-pointer py-2'
-                                onClick={() => setOpenPreferences(true)}
+                                onClick={() => {
+                                    setOpenPreferences(true);
+                                    setInitialValue(workspace?.name);
+                                }}
                             >
                                 Preferences
                             </DropdownMenuItem>

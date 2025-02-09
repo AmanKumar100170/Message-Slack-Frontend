@@ -4,7 +4,7 @@ const WorkspacePreferencesModalContext = createContext();
 
 export const WorkspacePreferencesModalContextProvider = ({ children }) => {
     const [openPreferences, setOpenPreferences] = useState(false);
-    const [initialValue, setInitialValue] = useState('Edit Workspace');
+    const [initialValue, setInitialValue] = useState('');
 
     return (
         <WorkspacePreferencesModalContext.Provider value={{ openPreferences, setOpenPreferences, initialValue, setInitialValue }}>
