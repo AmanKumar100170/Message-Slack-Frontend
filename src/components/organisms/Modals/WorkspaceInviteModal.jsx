@@ -17,7 +17,7 @@ export const WorkspaceInviteModal = ({
     const { resetJoinCodeMutation } = useResetJoinCode(workspaceId);
 
     async function handleCopy() {
-        const inviteLink = `${window.location.origin}/join/${joinCode}`;
+        const inviteLink = `${joinCode}`;
         await navigator.clipboard.writeText(inviteLink);
 
         toast({
@@ -70,9 +70,18 @@ export const WorkspaceInviteModal = ({
                         variant='ghost'
                         onClick={handleCopy}
                     >
-                        Copy Link
+                        Copy Code
                         <CopyIcon className='size-4 ml-2' />
                     </Button>
+
+                    <a 
+                        href={`/workspaces/join/${workspaceId}`}
+                        target='_blank'
+                        rel='noreferrer'
+                        className='text-blue-500'
+                    >
+                        Redirect to join page
+                    </a>
                 </div>
 
                 <div
