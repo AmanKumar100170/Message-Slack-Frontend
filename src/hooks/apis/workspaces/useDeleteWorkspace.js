@@ -11,7 +11,7 @@ export const useDeleteWorkspace = (workspaceId) => {
         onSuccess: () => {
             console.log('Workspace deleted successfully');
         },
-        onError: () => {
+        onError: (error) => {
             console.log('Error in deleting workspace mutation', error);
         }
     });

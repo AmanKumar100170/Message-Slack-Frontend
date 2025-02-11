@@ -11,7 +11,7 @@ export const useUpdateWorkspace = (workspaceId) => {
         onSuccess: () => {
             console.log('Workspace updated successfully');
         },
-        onError: () => {
+        onError: (error) => {
             console.log('Error in updating workspace mutation', error);
         }
     });

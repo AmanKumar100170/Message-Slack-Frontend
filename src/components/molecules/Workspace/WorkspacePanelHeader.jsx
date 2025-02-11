@@ -29,6 +29,7 @@ export const WorkspacePanelHeader = ({ workspace }) => {
                 setOpenInviteModal={setOpenInviteModal}
                 workspaceName={workspace?.name}
                 joinCode={workspace?.joinCode}
+                workspaceId={workspace?._id}
             />
             <div
                 className='flex items-center justify-between px-4 gap-0.5 h-[50px]'
