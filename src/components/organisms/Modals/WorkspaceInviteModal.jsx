@@ -14,7 +14,7 @@ export const WorkspaceInviteModal = ({
 }) => {
 
     const { toast } = useToast();
-    const { resetJoinCodeMutation } = useResetJoinCode(workspaceId);
+    const { isPending, resetJoinCodeMutation } = useResetJoinCode(workspaceId);
 
     async function handleCopy() {
         const inviteLink = `${joinCode}`;
@@ -90,6 +90,7 @@ export const WorkspaceInviteModal = ({
                     <Button
                         variant='outline'
                         onClick={handleResetCode}
+                        disabled={isPending}
                     >
                         Reset Join Code
                         <RefreshCcwIcon className='size-4 ml-2' />

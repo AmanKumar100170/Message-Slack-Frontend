@@ -1,13 +1,34 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import VerificationInput from 'react-verification-input';
 
 import { Button } from '@/components/ui/button';
+import { useJoinWorkspace } from '@/hooks/apis/workspaces/useJoinWorkspace';
+import { useToast } from '@/hooks/use-toast';
 
 export const JoinPage = () => {
     const { workspaceId } = useParams();
+    const { toast } = useToast();
+    const navigate = useNavigate();
+    const { joinWorkspaceMutation } = useJoinWorkspace(workspaceId);
 
-    async function handleAddMemberToWorkspace() {
-        
+    async function handleAddMemberToWorkspace(joinCode) {
+        try {
+            await joinWorkspaceMutation(joinCode);
+
+            toast({
+                title: 'You have been added to the workspace successfully',
+                type: 'success'
+            });
+
+            navigate(`/workspaces/${workspaceId}`);
+        } catch (error) {
+            console.log('Error in adding member to the workspace', error);
+
+            toast({
+                title: 'Error in adding to the workspace ',
+                type: 'error'
+            });
+        }
     }
 
     return (
