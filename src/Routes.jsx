@@ -9,6 +9,8 @@ import { Notfound } from '@/pages/Notfound/Notfound';
 import { JoinPage } from '@/pages/Workspace/JoinPage';
 import { WorkspaceLayout } from '@/pages/Workspace/Layout';
 
+import { Channel } from './pages/Workspace/Channel/Channel';
+
 export const AppRoutes = () => {
     return (
         <Routes>
@@ -16,7 +18,7 @@ export const AppRoutes = () => {
             <Route path='/auth/signin' element={<Auth><SigninContainer /></Auth>} />
             <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path='/workspaces/:workspaceId' element={<ProtectedRoute><WorkspaceLayout>Workspace</WorkspaceLayout></ProtectedRoute>} />
-            <Route path='/workspaces/:workspaceId/channels/:channelId' element={<ProtectedRoute>Channel</ProtectedRoute>} />
+            <Route path='/workspaces/:workspaceId/channels/:channelId' element={<ProtectedRoute><WorkspaceLayout><Channel /></WorkspaceLayout></ProtectedRoute>} />
             <Route path='workspaces/join/:workspaceId' element={<JoinPage />} />
 
             <Route path='/*' element={<Notfound />} />
