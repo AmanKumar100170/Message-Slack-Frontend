@@ -18,6 +18,7 @@ export const ChannelHeader = ({ name }) => {
                         <FaChevronDown className='size-3 ml-2' />
                     </Button>
                 </DialogTrigger>
+                
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>

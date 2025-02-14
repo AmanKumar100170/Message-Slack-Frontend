@@ -1,12 +1,18 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-export const Hint = ({ align, side, label, children }) => {
+export const Hint = ({ 
+    align, 
+    side, 
+    label, 
+    children 
+}) => {
     return (
         <TooltipProvider>
             <Tooltip delayDuration={50}>
                 <TooltipTrigger asChild>
                     {children}
                 </TooltipTrigger>
+                
                 <TooltipContent
                     side={side}
                     align={align}

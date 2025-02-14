@@ -9,6 +9,6 @@ export const getChannelById = async ({ channelId, token }) => {
         });
         return response?.data?.data;
     } catch(error) {
-        console.log('Error in getChannelByIdRequest', error);
+        console.log('Error in get channel by Id request', error);
     }
 };
