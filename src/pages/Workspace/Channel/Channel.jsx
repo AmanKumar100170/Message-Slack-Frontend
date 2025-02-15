@@ -1,5 +1,6 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { Loader2Icon, TriangleAlertIcon } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ChannelHeader } from '@/components/molecules/Channel/ChannelHeader';
@@ -7,19 +8,43 @@ import { ChatInput } from '@/components/molecules/ChatInput/ChatInput';
 import { Message } from '@/components/molecules/Message/Message';
 import { useGetChannelById } from '@/hooks/apis/channels/useGetChannelById';
 import { useGetChannelMessages } from '@/hooks/apis/channels/useGetChannelMessages';
+import { useChannelMessages } from '@/hooks/context/useChannelMessages';
 import { useSocket } from '@/hooks/context/useSocket';
 
 export const Channel = () => {
     const { channelId } = useParams();
+    const queryClient = useQueryClient();
+
     const { channelDetails, isFetching, isError } = useGetChannelById(channelId);
+    const { setMessageList, messageList } = useChannelMessages();
     const { joinChannel } = useSocket();
-    const { messages } = useGetChannelMessages(channelId);
+    const { messages, isSuccess } = useGetChannelMessages(channelId);
+
+    const messageContainerListRef = useRef(null);
+
+    useEffect(() => {
+        if(messageContainerListRef.current) {
+            messageContainerListRef.current.scrollTop = messageContainerListRef.current.scrollHeight;
+        }
+    }, [messageList]);
+
+    useEffect(() => {
+        console.log('ChannelId', channelId);
+        queryClient.invalidateQueries('getPaginatedMessages');
+    }, [channelId]);
 
     useEffect(() => {
         if (!isFetching && !isError) {
             joinChannel(channelId);
         }
     }, [isFetching, isError, joinChannel, channelId]);
+
+    useEffect(() => {
+        if (isSuccess) {
+            console.log('Channel messages fetched');
+            setMessageList(messages);
+        }
+    }, [isSuccess, messages, setMessageList, messageList]);
 
     if(isFetching) {
         return (
@@ -44,9 +69,14 @@ export const Channel = () => {
         <div className='flex flex-col h-full'>
             <ChannelHeader name={channelDetails?.name} />
 
-            {messages?.reverse().map((message) => {
-                return <Message key={message._id} body={message.body} authorImage={message.senderId.avatar} authorName={message.senderId.username} />;
-            })}
+            <div
+                ref={messageContainerListRef}
+                className='flex-5 overflow-y-auto p-5 gap-y-2'
+            >
+                {messageList?.map((message) => {
+                    return <Message key={message._id} body={message.body} authorImage={message.senderId?.avatar} authorName={message.senderId?.username} createdAt={message.createdAt} />;
+                })}
+            </div>
 
             <div className='flex-1' /> 
             <ChatInput />
