@@ -38,8 +38,8 @@ export const Message = ({
 
                         <span>&nbsp;&nbsp;</span>
 
-                        <button className='text-xs text-muted-foreground hover:underline'>
-                            {createdAt}
+                        <button className='text-xs text-muted-foreground'>
+                            {createdAt || 'Just now'}
                         </button>
                     </div>
 
