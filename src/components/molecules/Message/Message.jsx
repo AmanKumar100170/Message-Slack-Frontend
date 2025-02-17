@@ -1,3 +1,4 @@
+import { MessageImageThumbnail } from '@/components/atoms/MessageImageThumbnail/MessageImageThumbnail';
 import { MessageRenderer } from '@/components/atoms/MessageRenderer/MessageRenderer';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
@@ -5,7 +6,8 @@ export const Message = ({
     authorImage, 
     authorName,
     createdAt,
-    body
+    body,
+    image
 }) => {
     return (
         <div
@@ -44,6 +46,8 @@ export const Message = ({
                     </div>
 
                     <MessageRenderer value={body} />
+
+                    {image && <MessageImageThumbnail url={image} />}
                 </div>
             </div>
         </div>
