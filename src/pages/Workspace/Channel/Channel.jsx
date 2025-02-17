@@ -31,6 +31,7 @@ export const Channel = () => {
     useEffect(() => {
         console.log('ChannelId', channelId);
         queryClient.invalidateQueries('getPaginatedMessages');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [channelId]);
 
     useEffect(() => {
@@ -42,9 +43,9 @@ export const Channel = () => {
     useEffect(() => {
         if (isSuccess) {
             console.log('Channel messages fetched');
-            setMessageList(messages);
+            setMessageList(messages.reverse());
         }
-    }, [isSuccess, messages, setMessageList, messageList]);
+    }, [isSuccess, messages, setMessageList, channelId]);
 
     if(isFetching) {
         return (
@@ -64,7 +65,7 @@ export const Channel = () => {
             </div>
         );
     }
-
+    
     return (
         <div className='flex flex-col h-full'>
             <ChannelHeader name={channelDetails?.name} />
