@@ -60,7 +60,7 @@ export const Payments = () => {
                         </button>
 
                         {isSuccess && <RenderRazorpayPopup
-                            amount={amount}
+                            amount={amount*100}
                             orderId={orderResponse?.id}
                             keyId={import.meta.env.VITE_RAZORPAY_KEY_ID}
                             currency={'INR'}
