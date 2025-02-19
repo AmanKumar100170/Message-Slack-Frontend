@@ -1,15 +1,18 @@
 import { useState } from 'react';
 
+import { RenderRazorpayPopup } from '@/components/molecules/RenderRazorpayPopup/RenderRazorpayPopup';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { useCreateOrder } from '@/hooks/apis/payments/useCreateOrder';
 
 export const Payments = () => {
     const [amount, setAmount] = useState('');
-    const { isPending, createOrderMutation } = useCreateOrder();
+    const [orderResponse, setOrderResponse] = useState(null);
+    const { isPending, isSuccess, createOrderMutation } = useCreateOrder();
 
     async function handleFormSubmit(e) {
         e.preventDefault();
-        await createOrderMutation(amount);
+        const response = await createOrderMutation(amount);
+        setOrderResponse(response);
     }
 
     return (
@@ -55,6 +58,13 @@ export const Payments = () => {
                         >
                             Pay Now
                         </button>
+
+                        {isSuccess && <RenderRazorpayPopup
+                            amount={amount}
+                            orderId={orderResponse?.id}
+                            keyId={import.meta.env.VITE_RAZORPAY_KEY_ID}
+                            currency={'INR'}
+                        />}
                     </form>
                 </CardContent>
                 <CardFooter className="bg-gray-100 text-center py-4 rounded-b-lg flex justify-center">
