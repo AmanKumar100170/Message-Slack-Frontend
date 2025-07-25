@@ -13,6 +13,7 @@
 - 💳 Payment integration via **Razorpay** for premium workspace plans.
 - 📦 Background task handling using **Bull** and **Redis** for queue management.
 - 🧱 Built with a scalable modular architecture, easily extensible for future features.
+- 🖼️ All user-uploaded images are securely stored on **AWS S3**.
 ![Workspace](public/Workspace.png)
 ![Invite](public/Invite.png)
 ---
