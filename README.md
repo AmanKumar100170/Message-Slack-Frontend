@@ -27,7 +27,7 @@
 - ⚙️ Role-based permissions and admin control
   
   ![Create Workspace](public/CreateWorkspace.png)
-  ![Edit Workspace](public/EditorWorkspace.png)
+  ![Edit Workspace](public/EditWorkspace.png)
 
 ### 💬 Real-time Messaging
 
