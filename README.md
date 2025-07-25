@@ -47,7 +47,6 @@
 
 - 💰 Razorpay integration for workspace monetization
 - 📄 Invoicing and payment tracking
-- 🧾 Tiered plans for extended features
 
 ### ⚙️ Queue & Job Management
 
